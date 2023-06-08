@@ -51,7 +51,6 @@
 #
 ### [GET] /feed 
 #### body: none
-#### headers: ["authorization"]: access_token
 #### Show you photos feed ordered by creation time
 #
 ### [DELETE] /photo

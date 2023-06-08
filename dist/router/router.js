@@ -1,0 +1,25 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.router = void 0;
+const express_1 = __importDefault(require("express"));
+const photoController_1 = require("../contorollers/photoController");
+const portfolioController_1 = require("../contorollers/portfolioController");
+const userController_1 = require("../contorollers/userController");
+const multer_1 = require("../libs/multer");
+const isAuthorized_1 = require("../middlewares/isAuthorized");
+const authValidator_1 = require("../validators/authValidator");
+const deleteValidator_1 = require("../validators/deleteValidator");
+const portfolioValidator_1 = require("../validators/portfolioValidator");
+exports.router = (0, express_1.default)();
+exports.router.post("/sign-up", authValidator_1.AuthValidator.checkSignUpBody, userController_1.UserController.signUp);
+exports.router.post("/login", authValidator_1.AuthValidator.checkLoginBody, userController_1.UserController.login);
+exports.router.get("/logout", userController_1.UserController.logout);
+exports.router.post("/create-portfolio", isAuthorized_1.isAuthorized, portfolioValidator_1.PortfolioValidator.createPortfolioBody, portfolioController_1.PortfolioController.createPortfolio);
+exports.router.post("/upload-photos", isAuthorized_1.isAuthorized, multer_1.upload.array("files"), portfolioValidator_1.PortfolioValidator.uploadPhotosToPortfolioBody, photoController_1.PhotoController.uploadPhotos);
+exports.router.get("/feed", photoController_1.PhotoController.photoFeed);
+exports.router.delete("/photo", isAuthorized_1.isAuthorized, deleteValidator_1.DeleteValidator.checkPhotoBody, photoController_1.PhotoController.delete);
+exports.router.delete("/portfolio", isAuthorized_1.isAuthorized, deleteValidator_1.DeleteValidator.checkPortfolioBody, portfolioController_1.PortfolioController.delete);
+exports.router.delete("/user", isAuthorized_1.isAuthorized, userController_1.UserController.delete);

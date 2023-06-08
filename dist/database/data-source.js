@@ -19,7 +19,7 @@ exports.AppDataSource = new typeorm_1.DataSource({
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE_NAME,
-    synchronize: false,
+    synchronize: true,
     logging: false,
     entities: [Photo_1.Photo, Portfolio_1.Portfolio, Session_1.Session, User_1.User],
     migrations: ["src/migration/**/*.ts"],

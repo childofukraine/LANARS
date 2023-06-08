@@ -1,5 +1,6 @@
 # LANARS
 #
+#### https://lanars.onrender.com
 ### [POST] /sign-up - using for register new users
 ### body: JSON
 ```json
